@@ -1,0 +1,30 @@
+{
+  "name": "friendfinder",
+  "version": "1.0.0",
+  "description": "This is a dating app that allows users to connect based on common interests and values.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisjones0517/FriendFinder.git"
+  },
+  "keywords": [
+    "dating",
+    "match",
+    "meet"
+  ],
+  "author": "Chris Jones",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrisjones0517/FriendFinder/issues"
+  },
+  "homepage": "https://github.com/chrisjones0517/FriendFinder#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0"
+  }
+}

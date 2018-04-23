@@ -1,13 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="icon" href="assets/images/myLogo.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Friend Finder | Survey</title>
 </head>
+
 <body>
-    <h1>This is the survey page</h1>
-    <p>This is a test paragraph</p>
+    <div class="container">
+        <form id="survey">
+            <div class="form-group">
+                <label for="name">Name (Required)</label>
+                <input type="text" class="form-control" id="name" maxlength="50" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Link to Photo Image (Required)</label>
+                <input type="text" class="form-control" id="name" size="35" maxlength="100" placeholder="e.g. http://www.myImage.com" required>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" for="q1">I prefer a quiet evening inside with a good movie versus an outdoor adventure.</label>
+                <select class="form-control" id="q1">
+                    <option value="" selected disabled>Select an Option</option>
+                    <option>1 (Strongly Disagree></option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5 (Strongly Agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" for="q2">I smoke cigarettes.</label>
+                <select class="form-control" id="q2">
+                    <option value="" selected disabled>Select an Option</option>
+                    <option>1 (Strongly Disagree></option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5 (Strongly Agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" for="q3">Religion promotes a healthy society.</label>
+                <select class="form-control" id="q3">
+                    <option value="" selected disabled>Select an Option</option>
+                    <option>1 (Strongly Disagree></option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5 (Strongly Agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" for="q4">I live a healthy lifestyle that includes regular exercise and a healthy diet.</label>
+                <select class="form-control" id="q4">
+                    <option value="" selected disabled>Select an Option</option>
+                    <option>1 (Strongly Disagree></option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5 (Strongly Agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" for="q5">Income inequality is one of the greatest modern challenges.</label>
+                <select class="form-control" id="q5">
+                    <option value="" selected disabled>Select an Option</option>
+                    <option>1 (Strongly Disagree></option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5 (Strongly Agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" for="q6">Pursuing truth and evidence should take precedence over hurting someone's feelings.</label>
+                <select class="form-control" id="q6">
+                    <option value="" selected disabled>Select an Option</option>
+                    <option>1 (Strongly Disagree></option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5 (Strongly Agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" for="q7">I form strong bonds with pets.</label>
+                <select class="form-control" id="q7">
+                    <option value="" selected disabled>Select an Option</option>
+                    <option>1 (Strongly Disagree></option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5 (Strongly Agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" for="q8">I prefer documentaries or news over movies and shows designed to provide fantasy and escape.></label>
+                <select class="form-control" id="q8">
+                    <option value="" selected disabled>Select an Option</option>
+                    <option>1 (Strongly Disagree></option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5 (Strongly Agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" for="q9">It is better to be a good person than to have nice things.</label>
+                <select class="form-control" id="q9">
+                    <option value="" selected disabled>Select an Option</option>
+                    <option>1 (Strongly Disagree></option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5 (Strongly Agree)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" for="q10">Would you be unfaithful to your spouse if you were angry at him/her and you knew you wouldn't get caught?</label>
+                <select class="form-control" id="q10">
+                    <option value="" selected disabled>Select an Option</option>
+                    <option>1 (Strongly Disagree></option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5 (Strongly Agree)</option>
+                </select>
+            </div>
+            <button id="formSubmit" class="btn btn-primary btn-block" type="submit">Submit</button>
+        </form>
+        <div class="container mt-3 mb-3">
+            <a href="/api/friends">API Friends List</a>
+            <span> | </span>
+            <a href="https://github.com/chrisjones0517/FriendFinder" target="_blank">GitHub Repo</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $('#formSubmit').on('click', (e) => {
+            e.preventDefault();
+            console.log($('survey'));
+        });
+    </script>
 </body>
+
 </html>

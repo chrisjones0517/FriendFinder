@@ -1,16 +1,17 @@
+
 const path = require('path');
 const friends = require('./../data/friends.js');
 const fs = require('fs');
+let addNewUser = friends.addNewUser;
+let userArray = friends.userArray;
 
 module.exports = function (app) {
     app.get('/api/friends', (req, res) => {
-        res.json(friends);
+        res.json(userArray);
     });
 
     app.post('/api/friends', (req, res) => {
-        fs.appendFile(__dirname + '/../data/friends.js', ',\n' + JSON.stringify(req.body, null, 2), 'utf-8', (err) => {
-            if (err) throw err;
-        });
-        // friends.push(req.body);
+        addNewUser(req.body.name, req.body.userPic, req.body.score);
+        res.send("Post request was successful.");
     });
 };

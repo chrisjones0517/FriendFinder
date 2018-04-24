@@ -16,8 +16,10 @@
     <div class="container">
         <h3>Survey Questions</h3>
         <hr>
+        <p>Note: if a question is unanswered before submitting, the default value will be 3. Please answer all questions for
+            the best possible match.</p>
         <h5>About You</h5>
-        <form id="survey">
+        <form id="survey" role="form">
             <div class="form-group">
                 <label for="name">Name (Required)</label>
                 <input type="text" class="form-control" id="name" maxlength="50">
@@ -156,6 +158,26 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div id="matchDisplay" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Best Match</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Dynamically created elements with match data go here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -179,18 +201,16 @@
                 alert('Please enter a valid image link!');
             } else {
 
-                let answerArray = [];
+                let score = [];
 
                 for (let i = 1; i < 11; i++) {
                     let answer = $('#q' + i).val();
                     if (answer) {
-                        answerArray.push(parseInt(answer.substring(0, 1)));
+                        score.push(parseInt(answer.substring(0, 1)));
                     } else {
-                        answerArray.push(3);
+                        score.push(3);
                     }
                 }
-
-                let score = answerArray.reduce(sum);
 
                 let newUser = {
                     name: $('#name').val().trim(),
@@ -199,12 +219,38 @@
                 };
 
                 let currentURL = window.location.origin;
-                
-                $.post(currentURL + '/api/friends', newUser, (data, status, xhr) => {
-                    console.log(data, status, xhr);
+
+                $.post(currentURL + '/api/friends', newUser);
+
+                $.ajax({
+                    url: currentURL + '/api/friends',
+                    method: 'GET'
+                }).done((res) => {
+
+                    let tempVal = 41;
+                    let bestMatch;
+                    res.forEach((item) => {
+                        let DBscoreArrStr = item.score;
+                        let DBuserTotal = DBscoreArrStr.map(Number).reduce(sum);
+                        let currentUserTotal = newUser.score.reduce(sum);
+                        let diff = Math.abs(currentUserTotal - DBuserTotal);
+                        
+                        if (diff < tempVal) {
+                            bestMatch = item;
+                            tempVal = diff;
+                        }
+                    });
+                   
+                    $('.modal-body').empty();
+                    $('.modal-body').append(`
+                        <h6>${bestMatch.name}</h6>
+                        <img src=${bestMatch.userPic} alt="profile image not available" width="250" height="250">
+                    `);
+                    $('#matchDisplay').modal('show');
+                    $('#survey')[0].reset();
                 });
             }
-
+            return false;
         });
 
         function sum(total, num) {

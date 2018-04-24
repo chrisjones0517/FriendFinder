@@ -1,78 +1,61 @@
 
-module.exports = 
-    {
-        "name": "sdfgs sdfg",
-        "userPic": "www.sdf.com",
-        "score": "30"
-    },
-    {
-        "name": "fsdg sdfgsd",
-        "userPic": "www.sdf.net",
-        "score": "30"
-    },
-    {
-        "name": "sdfgsd sdfgsdf",
-        "userPic": "www.dsf.com",
-        "score": "30"
+let userArray = [];
+let firebase = require('firebase');
+
+let config = {
+    apiKey: "AIzaSyCrF-xA8-yUBa5BfV9Y35QqLbOJ2PjHDeU",
+    authDomain: "friendfinder-ba675.firebaseapp.com",
+    databaseURL: "https://friendfinder-ba675.firebaseio.com",
+    projectId: "friendfinder-ba675",
+    storageBucket: "",
+    messagingSenderId: "981670700023"
+};
+let app = firebase.initializeApp(config);
+database = firebase.database();
+let ref = database.ref('users');
+ref.once('value', retrieveData, errData);
+
+function retrieveData(data) {
+
+    let users = data.val();
+    let keys = Object.keys(users);
+
+    for (let i = 0; i < keys.length; i++) {
+        let k = keys[i];
+        let username = users[k].username;
+        let userPic = users[k].userPic;
+        let score = users[k].score;
+        userArray.push({
+            name: username,
+            userPic: userPic,
+            score: score
+        });
     }
-,
-{
-  "name": "sfdgsdg sfgsf",
-  "userPic": "www.sdfs.com",
-  "score": "30"
-},
-{
-  "name": "ertwe wertwe",
-  "userPic": "www.sdf.com",
-  "score": "30"
-},
-{
-  "name": "dfsfsa retwetr",
-  "userPic": "www.sdfs.com",
-  "score": "30"
-},
-{
-  "name": "rtyetr sfgsdfg",
-  "userPic": "www.sdfsd.com",
-  "score": "30"
-},
-{
-  "name": "test this",
-  "userPic": "www.email.com",
-  "score": "30"
-},
-{
-  "name": "test this",
-  "userPic": "www.this.com",
-  "score": "30"
-},
-{
-  "name": "test this",
-  "userPic": "www.this.com",
-  "score": "30"
-},
-{
-  "name": "test this",
-  "userPic": "www.this.com",
-  "score": "30"
-},
-{
-  "name": "test this",
-  "userPic": "www.this.com",
-  "score": "30"
-},
-{
-  "name": "test this",
-  "userPic": "www.this.com",
-  "score": "30"
-},
-{
-  "name": "test this",
-  "userPic": "www.this.com",
-  "score": "30"
-},
-{
-  "name": "test this",
-  "userPic": "www.this.com",
-  "score": "30"
 }
+
+function errData(err) {
+    console.log(err);
+}
+
+let addNewUser = function (username, picture, score) {
+    // A post entry.
+    let postData = {
+        username: username,
+        userPic: picture,
+        score: score
+    };
+
+    let newUserKey = firebase.database().ref().child('users').push().key;
+
+    let updates = {};
+    updates['/users/' + newUserKey] = postData;
+
+    return firebase.database().ref().update(updates);
+}
+
+module.exports = {
+    addNewUser: addNewUser,
+    userArray: userArray
+};
+
+

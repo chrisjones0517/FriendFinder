@@ -10,6 +10,7 @@ let config = {
     storageBucket: "",
     messagingSenderId: "981670700023"
 };
+
 let app = firebase.initializeApp(config);
 database = firebase.database();
 let ref = database.ref('users');
@@ -19,7 +20,7 @@ function retrieveData(data) {
 
     let users = data.val();
     let keys = Object.keys(users);
-    // userArray = [];
+    userArray = [];
     for (let i = 0; i < keys.length; i++) {
         let k = keys[i];
         let username = users[k].username;
@@ -31,7 +32,6 @@ function retrieveData(data) {
             score: score
         });
     }
-   // console.log(userArray, 'I ran!!!');
 }
 
 function errData(err) {
@@ -56,7 +56,9 @@ let addNewUser = function (username, picture, score) {
 
 module.exports = {
     addNewUser: addNewUser,
-    userArray: userArray
+    userArrayReady: function () {
+        return userArray;
+    }
 };
 
 

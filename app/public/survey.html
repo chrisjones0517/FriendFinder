@@ -8,7 +8,6 @@
     <link rel="icon" href="assets/images/myLogo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/style.css">
     <title>Friend Finder | Survey</title>
 </head>
 
@@ -226,20 +225,20 @@
                     url: currentURL + '/api/friends',
                     method: 'GET'
                 }).done((res) => {
-                    console.log(res);
+                    
                     let tempVal = 41;
                     let bestMatch;
-                    res.forEach((item) => {
-                        let DBscoreArrStr = item.score;
+                    for (let i = 0; i < res.length - 1; i++) {
+                        let DBscoreArrStr = res[i].score;
                         let DBuserTotal = DBscoreArrStr.map(Number).reduce(sum);
                         let currentUserTotal = newUser.score.reduce(sum);
                         let diff = Math.abs(currentUserTotal - DBuserTotal);
-
+                        
                         if (diff < tempVal) {
-                            bestMatch = item;
+                            bestMatch = res[i];
                             tempVal = diff;
                         }
-                    });
+                    }
 
                     $('.modal-body').empty();
                     $('.modal-body').append(`

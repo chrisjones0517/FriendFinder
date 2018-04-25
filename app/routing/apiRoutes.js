@@ -3,19 +3,12 @@ const path = require('path');
 const friends = require('./../data/friends.js');
 const fs = require('fs');
 let addNewUser = friends.addNewUser;
-let userArray = friends.userArray;
+let userArrayReady = friends.userArrayReady;
 
 module.exports = function (app) {
     app.get('/api/friends', (req, res) => {
         
-        // for (let i = 0; i < userArray.length; i++) {
-        //     for (let j = 0; j < i; j++) {
-        //         if (j !== i && userArray[i].name === userArray[j].name) {
-        //             userArray.splice(j, 1);
-        //         }
-        //     }
-        // }
-        
+        let userArray = userArrayReady();     
         res.json(userArray);
     });
 

@@ -194,7 +194,7 @@
             let pattern = /^(http|https|www)(\.|:)\S*(\.com|\.net|\.org)/;
             let result = pattern.test(userPic);
 
-            if (name === '' || name.indexOf(' ') === -1) {
+            if (name === '' || name.indexOf(' ') === -1 || hasNumber(name) || isValid(name)) {
                 alert('Please enter a first and last name!');
             } else if (!result) {
                 alert('Please enter a valid image link!');
@@ -225,7 +225,7 @@
                     url: currentURL + '/api/friends',
                     method: 'GET'
                 }).done((res) => {
-                    
+
                     let tempVal = 41;
                     let bestMatch;
                     for (let i = 0; i < res.length - 1; i++) {
@@ -233,7 +233,7 @@
                         let DBuserTotal = DBscoreArrStr.map(Number).reduce(sum);
                         let currentUserTotal = newUser.score.reduce(sum);
                         let diff = Math.abs(currentUserTotal - DBuserTotal);
-                        
+
                         if (diff < tempVal) {
                             bestMatch = res[i];
                             tempVal = diff;
@@ -254,6 +254,14 @@
 
         function sum(total, num) {
             return total + num;
+        }
+
+        function hasNumber(myString) {
+            return /\d/.test(myString);
+        }
+
+        function isValid(str) {
+            return /[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(str);
         }
 
     </script>

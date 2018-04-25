@@ -1,7 +1,7 @@
 {
   "name": "friendfinder",
   "version": "1.0.0",
-  "description": "This is a dating app that allows users to connect based on common interests and values.",
+  "description": "This is a friend finding app that allows users to connect based on common interests and values.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

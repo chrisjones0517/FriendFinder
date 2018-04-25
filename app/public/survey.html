@@ -226,7 +226,7 @@
                     url: currentURL + '/api/friends',
                     method: 'GET'
                 }).done((res) => {
-
+                    console.log(res);
                     let tempVal = 41;
                     let bestMatch;
                     res.forEach((item) => {
@@ -234,13 +234,13 @@
                         let DBuserTotal = DBscoreArrStr.map(Number).reduce(sum);
                         let currentUserTotal = newUser.score.reduce(sum);
                         let diff = Math.abs(currentUserTotal - DBuserTotal);
-                        
+
                         if (diff < tempVal) {
                             bestMatch = item;
                             tempVal = diff;
                         }
                     });
-                   
+
                     $('.modal-body').empty();
                     $('.modal-body').append(`
                         <h6>${bestMatch.name}</h6>

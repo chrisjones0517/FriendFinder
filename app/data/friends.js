@@ -13,13 +13,13 @@ let config = {
 let app = firebase.initializeApp(config);
 database = firebase.database();
 let ref = database.ref('users');
-ref.once('value', retrieveData, errData);
+ref.on('value', retrieveData, errData);
 
 function retrieveData(data) {
 
     let users = data.val();
     let keys = Object.keys(users);
-
+    // userArray = [];
     for (let i = 0; i < keys.length; i++) {
         let k = keys[i];
         let username = users[k].username;
@@ -31,6 +31,7 @@ function retrieveData(data) {
             score: score
         });
     }
+   // console.log(userArray, 'I ran!!!');
 }
 
 function errData(err) {
@@ -38,7 +39,7 @@ function errData(err) {
 }
 
 let addNewUser = function (username, picture, score) {
-    // A post entry.
+
     let postData = {
         username: username,
         userPic: picture,
